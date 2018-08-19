@@ -14,7 +14,8 @@ ENV SIAB_USERCSS="Normal:+/etc/shellinabox/options-enabled/00+Black-on-White.css
     SIAB_SSL=true \
     SIAB_SERVICE=/:LOGIN \
     SIAB_PKGS=none \
-    SIAB_SCRIPT=none
+    SIAB_SCRIPT=none \
+    SIAB=CERTS=/var/lib/shellinabox 
 
 RUN apt-get update && apt-get install -y openssl curl openssh-client sudo shellinabox && \
     apt-get clean && \
