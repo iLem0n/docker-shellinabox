@@ -7,6 +7,13 @@ hex()
 	openssl rand -hex 8
 }
 
+echo "Wait for certificate in: " + ${SIAB_CERTS}
+while [ ! -f ${SIAB_CERTS}+'certificate.pem' ] ;
+do 
+	echo 'Unable to find \'' + ${SIAB_CERTS}+'certificate.pem\'. Keep trying ...';
+	sleep 5;
+done
+
 echo "Preparing container .."
 COMMAND="/usr/bin/shellinaboxd --debug --no-beep --disable-peer-check -u shellinabox -g shellinabox -c ${SIAB_CERTS} -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
 
