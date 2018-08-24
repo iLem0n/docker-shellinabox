@@ -7,15 +7,22 @@ hex()
 	openssl rand -hex 8
 }
 
-echo "Wait for certificate: " + ${SIAB_CERTS}
-while [ ! -f ${SIAB_CERTS}+'certificate.pem' ] ;
-do 
-	echo "Unable to find \'" + ${SIAB_CERTS}+"certificate.pem\'. Keep trying ...";
-	sleep 5;
-done
 
+
+echo "Wait for certificate: " + ${SIAB_CERTS}
+if [ "$SIAB_CERT_WAIT" == "true" ]; then
+	while [ ! -f ${SIAB_CERTS}+'certificate.pem' ] ;
+	do 
+		echo "Unable to find \'" + ${SIAB_CERTS}+"certificate.pem\'. Keep trying ...";
+		sleep 5;
+	done
+fi
 echo "Preparing container .."
-COMMAND="/usr/bin/shellinaboxd --debug --no-beep --disable-peer-check -u shellinabox -g shellinabox -c ${SIAB_CERTS} -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
+if [ "$SIAB_LOCAL" == "true" ]; then
+	COMMAND="/usr/bin/shellinaboxd --local-only --debug --no-beep --disable-peer-check -u shellinabox -g shellinabox -c ${SIAB_CERTS} -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
+else
+	COMMAND="/usr/bin/shellinaboxd --debug --no-beep --disable-peer-check -u shellinabox -g shellinabox -c ${SIAB_CERTS} -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
+fi
 
 if [ "$SIAB_PKGS" != "none" ]; then
 	set +e
