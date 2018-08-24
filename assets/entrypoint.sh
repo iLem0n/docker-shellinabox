@@ -9,14 +9,15 @@ hex()
 
 
 
-echo "Wait for certificate: " + ${SIAB_CERTS}
-if [ "$SIAB_CERT_WAIT" == "true" ]; then
+echo "Wait for certificate: " ${SIAB_CERTS}
+if [ "$SIAB_CERTS_WAIT" == "true" ]; then
 	while [ ! -f ${SIAB_CERTS}+'certificate.pem' ] ;
 	do 
 		echo "Unable to find \'" + ${SIAB_CERTS}+"certificate.pem\'. Keep trying ...";
 		sleep 5;
 	done
 fi
+
 echo "Preparing container .."
 if [ "$SIAB_LOCAL" == "true" ]; then
 	COMMAND="/usr/bin/shellinaboxd --local-only --debug --no-beep --disable-peer-check -u shellinabox -g shellinabox -c ${SIAB_CERTS} -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
