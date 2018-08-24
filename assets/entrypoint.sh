@@ -7,10 +7,10 @@ hex()
 	openssl rand -hex 8
 }
 
-echo "Wait for certificate in: " + ${SIAB_CERTS}
+echo "Wait for certificate: " + ${SIAB_CERTS}
 while [ ! -f ${SIAB_CERTS}+'certificate.pem' ] ;
 do 
-	echo 'Unable to find \'' + ${SIAB_CERTS}+'certificate.pem\'. Keep trying ...';
+	echo "Unable to find \'" + ${SIAB_CERTS}+"certificate.pem\'. Keep trying ...";
 	sleep 5;
 done
 
