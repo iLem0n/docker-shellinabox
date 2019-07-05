@@ -20,7 +20,7 @@ fi
 
 echo "Preparing container .."
 if [ "$SIAB_LOCAL" == "true" ]; then
-	COMMAND="/usr/bin/shellinaboxd --local-only --debug --no-beep --disable-peer-check -u shellinabox -g shellinabox -c ${SIAB_CERTS} -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
+	COMMAND="/usr/bin/shellinaboxd --localhost-only --debug --no-beep --disable-peer-check -u shellinabox -g shellinabox -c ${SIAB_CERTS} -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
 else
 	COMMAND="/usr/bin/shellinaboxd --debug --no-beep --disable-peer-check -u shellinabox -g shellinabox -c ${SIAB_CERTS} -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
 fi
